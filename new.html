@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>keycloak-lite</title>
+    <script src="keycloak.js"></script>
+  </head>
+  <body>
+    <button onclick="keycloak.login()">login</button>
+    <button onclick="keycloak.logout()">logout</button>
+    <script>
+      const keycloak = new Keycloak({
+        url: "http://localhost:8080",
+        realm: "test",
+        clientId: "test"
+      });
+      keycloak
+        .init({ promiseType: "native" })
+        .then(authenticated => {
+          console.log(authenticated ? "authenticated" : "not authenticated");
+        })
+        .catch(() => {
+          console.log("failed to initialize");
+        });
+    </script>
+  </body>
+</html>
